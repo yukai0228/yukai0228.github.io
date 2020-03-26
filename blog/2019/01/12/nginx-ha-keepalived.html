@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Nginx+Keepalived高可用架构 | 走在回忆之外的博客</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/2.styles.018b034a.css" as="style"><link rel="preload" href="/assets/js/app.ccf869c0.js" as="script"><link rel="preload" href="/assets/js/16.c7ada16b.js" as="script"><link rel="preload" href="/assets/js/9.db4378e9.js" as="script"><link rel="preload" href="/assets/js/12.613cb65c.js" as="script"><link rel="prefetch" href="/assets/js/0.18cadbf9.js"><link rel="prefetch" href="/assets/js/1.d1daa0f2.js"><link rel="prefetch" href="/assets/js/10.27a8b706.js"><link rel="prefetch" href="/assets/js/11.e79c91cb.js"><link rel="prefetch" href="/assets/js/13.3f0b1f43.js"><link rel="prefetch" href="/assets/js/14.d872cc34.js"><link rel="prefetch" href="/assets/js/15.ffb1ef98.js"><link rel="prefetch" href="/assets/js/17.ecf82cc6.js"><link rel="prefetch" href="/assets/js/18.8a2b9ec2.js"><link rel="prefetch" href="/assets/js/19.165f6698.js"><link rel="prefetch" href="/assets/js/20.09cd4c1b.js"><link rel="prefetch" href="/assets/js/21.042605b9.js"><link rel="prefetch" href="/assets/js/22.42921429.js"><link rel="prefetch" href="/assets/js/23.d815bf15.js"><link rel="prefetch" href="/assets/js/24.7c176d91.js"><link rel="prefetch" href="/assets/js/25.df47188f.js"><link rel="prefetch" href="/assets/js/26.436dcb77.js"><link rel="prefetch" href="/assets/js/27.7e6a558e.js"><link rel="prefetch" href="/assets/js/28.faa900d8.js"><link rel="prefetch" href="/assets/js/29.8e36e633.js"><link rel="prefetch" href="/assets/js/30.17168196.js"><link rel="prefetch" href="/assets/js/31.c8ab0cc7.js"><link rel="prefetch" href="/assets/js/32.a3c72bfa.js"><link rel="prefetch" href="/assets/js/4.4b907ce9.js"><link rel="prefetch" href="/assets/js/5.3821dc34.js"><link rel="prefetch" href="/assets/js/6.7cd846c3.js"><link rel="prefetch" href="/assets/js/7.dad13e92.js"><link rel="prefetch" href="/assets/js/8.966d90c7.js">
+    <link rel="stylesheet" href="/assets/css/2.styles.018b034a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">走在回忆之外的博客</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/blog/categories/" class="nav-link">分类</a></div><div class="nav-item"><a href="/blog/tags/" class="nav-link">标签</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><a href="https://www.github.com/yukai0228" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://www.baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  技术支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/blog/categories/" class="nav-link">分类</a></div><div class="nav-item"><a href="/blog/tags/" class="nav-link">标签</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><a href="https://www.github.com/yukai0228" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://www.baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  技术支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>Nginx+Keepalived高可用架构</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/2019/01/12/nginx-ha-keepalived.html#安装keepalived" class="sidebar-link">安装Keepalived</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/01/12/nginx-ha-keepalived.html#安装两台机器上nginx" class="sidebar-link">安装两台机器上Nginx</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/01/12/nginx-ha-keepalived.html#配置nginx" class="sidebar-link">配置Nginx</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/01/12/nginx-ha-keepalived.html#配置keepalived" class="sidebar-link">配置KeepAlived</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/01/12/nginx-ha-keepalived.html#在双服务器上添加检测脚本" class="sidebar-link">在双服务器上添加检测脚本</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/01/12/nginx-ha-keepalived.html#启动nginx和keepalived" class="sidebar-link">启动nginx和keepalived</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/01/12/nginx-ha-keepalived.html#测试脚本是否正常运行" class="sidebar-link">测试脚本是否正常运行</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/01/12/nginx-ha-keepalived.html#ecs绑定公网ip" class="sidebar-link">ECS绑定公网ip</a><ul class="sidebar-sub-headers"></ul></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="nginx-keepalived高可用架构"><a href="#nginx-keepalived高可用架构" aria-hidden="true" class="header-anchor">#</a> Nginx+Keepalived高可用架构</h1> <small><div>发布于 01/12/2019, 9:40 PM</div> <span>
+  分类:
+  <a href="/blog/categories/#运维">
+    运维
+  </a></span> <span>
+  标签:
+  <a href="/blog/tags/#nginx">
+    Nginx
+  </a><a href="/blog/tags/#keepalived">
+    Keepalived
+  </a></span></small> <p></p><div class="table-of-contents"><ul><li><a href="#安装keepalived">安装Keepalived</a></li><li><a href="#安装两台机器上nginx">安装两台机器上Nginx</a></li><li><a href="#配置nginx">配置Nginx</a></li><li><a href="#配置keepalived">配置KeepAlived</a></li><li><a href="#在双服务器上添加检测脚本">在双服务器上添加检测脚本</a></li><li><a href="#启动nginx和keepalived">启动nginx和keepalived</a></li><li><a href="#测试脚本是否正常运行">测试脚本是否正常运行</a></li><li><a href="#ecs绑定公网ip">ECS绑定公网ip</a></li></ul></div><p></p> <h2 id="安装keepalived"><a href="#安装keepalived" aria-hidden="true" class="header-anchor">#</a> 安装Keepalived</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>yum <span class="token function">install</span> -y keepalived
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h2 id="安装两台机器上nginx"><a href="#安装两台机器上nginx" aria-hidden="true" class="header-anchor">#</a> 安装两台机器上Nginx</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>yum -y <span class="token function">install</span> nginx
+<span class="token keyword">echo</span> <span class="token string">&quot;this is 192.168.0.5&quot;</span> <span class="token operator">&gt;</span> /usr/share/nginx/html/index.html 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="配置nginx"><a href="#配置nginx" aria-hidden="true" class="header-anchor">#</a> 配置Nginx</h2> <p>Node1上的nginx.conf:</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code> upstream customer_server <span class="token punctuation">{</span>
+	    server 192.168.0.233:8802<span class="token punctuation">;</span>
+        server 192.168.0.55:8802<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>    
+
+ server <span class="token punctuation">{</span>
+        listen       80 default_server<span class="token punctuation">;</span>
+        listen       <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:80 default_server<span class="token punctuation">;</span>
+        server_name  _<span class="token punctuation">;</span>
+        root         /usr/share/nginx/html<span class="token punctuation">;</span>
+
+        <span class="token comment"># Load configuration files for the default server block.</span>
+        include /etc/nginx/default.d/*.conf<span class="token punctuation">;</span>
+
+        location / <span class="token punctuation">{</span>
+            proxy_set_header Host <span class="token variable">$host</span><span class="token punctuation">;</span>
+            proxy_set_header X-Forwarded-For <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+            proxy_pass http://customer_server<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p>Node2上的nginx.conf:</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code> upstream customer_server <span class="token punctuation">{</span>
+	    server 192.168.0.233:8802<span class="token punctuation">;</span>
+        server 192.168.0.55:8802<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>    
+
+ server <span class="token punctuation">{</span>
+        listen       80 default_server<span class="token punctuation">;</span>
+        listen       <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:80 default_server<span class="token punctuation">;</span>
+        server_name  _<span class="token punctuation">;</span>
+        root         /usr/share/nginx/html<span class="token punctuation">;</span>
+
+        <span class="token comment"># Load configuration files for the default server block.</span>
+        include /etc/nginx/default.d/*.conf<span class="token punctuation">;</span>
+
+        location / <span class="token punctuation">{</span>
+            proxy_set_header Host <span class="token variable">$host</span><span class="token punctuation">;</span>
+            proxy_set_header X-Forwarded-For <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+            proxy_pass http://customer_server<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h2 id="配置keepalived"><a href="#配置keepalived" aria-hidden="true" class="header-anchor">#</a> 配置KeepAlived</h2> <p>Node1上的keepalived.conf:</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>global_defs <span class="token punctuation">{</span>
+   notification_email <span class="token punctuation">{</span>
+     acassen@firewall.loc
+     failover@firewall.loc
+     sysadmin@firewall.loc
+   <span class="token punctuation">}</span>
+   notification_email_from Alexandre.Cassen@firewall.loc
+   smtp_server 192.168.200.1
+   smtp_connect_timeout 30
+   router_id nginx_master
+<span class="token punctuation">}</span>
+
+vrrp_script chk_nginx <span class="token punctuation">{</span>
+    script <span class="token string">&quot;/etc/keepalived/chk_nginx.sh&quot;</span>
+    interval 2
+    weight 2
+<span class="token punctuation">}</span>
+
+vrrp_instance VI_1 <span class="token punctuation">{</span>
+    state MASTER
+    interface eth0
+    virtual_router_id 51
+    priority 100
+    advert_int 1
+    authentication <span class="token punctuation">{</span>
+        auth_type PASS
+        auth_pass 1111
+    <span class="token punctuation">}</span>
+    track_script <span class="token punctuation">{</span>
+        chk_nginx
+    <span class="token punctuation">}</span>
+    virtual_ipaddress <span class="token punctuation">{</span>
+        192.168.0.203/16 dev eth0 label eth0:1
+    <span class="token punctuation">}</span>
+    unicast_src_ip 192.168.0.5
+    unicast_peer <span class="token punctuation">{</span>
+        192.168.0.45
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br></div></div><p>Node2上的keepalived.conf:</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>global_defs <span class="token punctuation">{</span>
+   notification_email <span class="token punctuation">{</span>
+     acassen@firewall.loc
+     failover@firewall.loc
+     sysadmin@firewall.loc
+   <span class="token punctuation">}</span>
+   notification_email_from Alexandre.Cassen@firewall.loc
+   smtp_server 192.168.200.1
+   smtp_connect_timeout 30
+   router_id nginx_master
+<span class="token punctuation">}</span>
+
+vrrp_script chk_nginx <span class="token punctuation">{</span>
+    script <span class="token string">&quot;/etc/keepalived/chk_nginx.sh&quot;</span>
+    interval 2
+    weight 2
+<span class="token punctuation">}</span>
+
+vrrp_instance VI_1 <span class="token punctuation">{</span>
+    state BACKUP
+    interface eth0
+    virtual_router_id 51
+    priority 99
+    advert_int 1
+    authentication <span class="token punctuation">{</span>
+        auth_type PASS
+        auth_pass 1111
+    <span class="token punctuation">}</span>
+    track_script <span class="token punctuation">{</span>
+        chk_nginx
+    <span class="token punctuation">}</span>
+    virtual_ipaddress <span class="token punctuation">{</span>
+        192.168.0.203/16 dev eth0 label eth0:1
+    <span class="token punctuation">}</span>
+    unicast_src_ip 192.168.0.45
+    unicast_peer <span class="token punctuation">{</span>
+        192.168.0.5
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br></div></div><h2 id="在双服务器上添加检测脚本"><a href="#在双服务器上添加检测脚本" aria-hidden="true" class="header-anchor">#</a> 在双服务器上添加检测脚本</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token punctuation">[</span>root@server-0004 ~<span class="token punctuation">]</span><span class="token comment"># cat /etc/keepalived/chk_nginx.sh </span>
+<span class="token comment">#!/bin/bash</span>
+status<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ps</span> -C nginx --no-heading<span class="token operator">|</span><span class="token function">wc</span> -l<span class="token variable">)</span></span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${status}</span>&quot;</span> <span class="token operator">=</span> <span class="token string">&quot;0&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+            systemctl start nginx
+        status2<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ps</span> -C nginx --no-heading<span class="token operator">|</span><span class="token function">wc</span> -l<span class="token variable">)</span></span>
+        <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${status2}</span>&quot;</span> <span class="token operator">=</span> <span class="token string">&quot;0&quot;</span>  <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+                systemctl stop keepalived
+        <span class="token keyword">fi</span>
+<span class="token keyword">fi</span>
+<span class="token comment"># 可执行脚本</span>
+<span class="token punctuation">[</span>root@server-0004 ~<span class="token punctuation">]</span><span class="token comment"># chmod +x chk_nginx.sh </span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><h2 id="启动nginx和keepalived"><a href="#启动nginx和keepalived" aria-hidden="true" class="header-anchor">#</a> 启动nginx和keepalived</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">service</span> nginx start
+<span class="token function">service</span> keepalived start
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="测试脚本是否正常运行"><a href="#测试脚本是否正常运行" aria-hidden="true" class="header-anchor">#</a> 测试脚本是否正常运行</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">service</span> nginx stop
+<span class="token comment"># 查看端口运行情况</span>
+ss -tnlp
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="ecs绑定公网ip"><a href="#ecs绑定公网ip" aria-hidden="true" class="header-anchor">#</a> ECS绑定公网ip</h2> <p>华为云中将2台同子网的云服务器绑定同一个虚拟IP即可,阿里云需开通HaVIP
+<div id="vcomments"></div></p></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/app.ccf869c0.js" defer></script><script src="/assets/js/16.c7ada16b.js" defer></script><script src="/assets/js/9.db4378e9.js" defer></script><script src="/assets/js/12.613cb65c.js" defer></script>
+  </body>
+</html>

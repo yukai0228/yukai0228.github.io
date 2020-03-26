@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>k8s + goodrain 环境搭建 | 走在回忆之外的博客</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/2.styles.018b034a.css" as="style"><link rel="preload" href="/assets/js/app.ccf869c0.js" as="script"><link rel="preload" href="/assets/js/25.df47188f.js" as="script"><link rel="preload" href="/assets/js/9.db4378e9.js" as="script"><link rel="preload" href="/assets/js/12.613cb65c.js" as="script"><link rel="prefetch" href="/assets/js/0.18cadbf9.js"><link rel="prefetch" href="/assets/js/1.d1daa0f2.js"><link rel="prefetch" href="/assets/js/10.27a8b706.js"><link rel="prefetch" href="/assets/js/11.e79c91cb.js"><link rel="prefetch" href="/assets/js/13.3f0b1f43.js"><link rel="prefetch" href="/assets/js/14.d872cc34.js"><link rel="prefetch" href="/assets/js/15.ffb1ef98.js"><link rel="prefetch" href="/assets/js/16.c7ada16b.js"><link rel="prefetch" href="/assets/js/17.ecf82cc6.js"><link rel="prefetch" href="/assets/js/18.8a2b9ec2.js"><link rel="prefetch" href="/assets/js/19.165f6698.js"><link rel="prefetch" href="/assets/js/20.09cd4c1b.js"><link rel="prefetch" href="/assets/js/21.042605b9.js"><link rel="prefetch" href="/assets/js/22.42921429.js"><link rel="prefetch" href="/assets/js/23.d815bf15.js"><link rel="prefetch" href="/assets/js/24.7c176d91.js"><link rel="prefetch" href="/assets/js/26.436dcb77.js"><link rel="prefetch" href="/assets/js/27.7e6a558e.js"><link rel="prefetch" href="/assets/js/28.faa900d8.js"><link rel="prefetch" href="/assets/js/29.8e36e633.js"><link rel="prefetch" href="/assets/js/30.17168196.js"><link rel="prefetch" href="/assets/js/31.c8ab0cc7.js"><link rel="prefetch" href="/assets/js/32.a3c72bfa.js"><link rel="prefetch" href="/assets/js/4.4b907ce9.js"><link rel="prefetch" href="/assets/js/5.3821dc34.js"><link rel="prefetch" href="/assets/js/6.7cd846c3.js"><link rel="prefetch" href="/assets/js/7.dad13e92.js"><link rel="prefetch" href="/assets/js/8.966d90c7.js">
+    <link rel="stylesheet" href="/assets/css/2.styles.018b034a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">走在回忆之外的博客</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/blog/categories/" class="nav-link">分类</a></div><div class="nav-item"><a href="/blog/tags/" class="nav-link">标签</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><a href="https://www.github.com/yukai0228" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://www.baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  技术支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/blog/categories/" class="nav-link">分类</a></div><div class="nav-item"><a href="/blog/tags/" class="nav-link">标签</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><a href="https://www.github.com/yukai0228" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://www.baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  技术支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>k8s + goodrain 环境搭建</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/2019/04/12/k8s%20%2B%20goodrain%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.html#安装docker和k8s集群环境" class="sidebar-link">安装docker和k8s集群环境</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/04/12/k8s%20%2B%20goodrain%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.html#配置docker文件驱动" class="sidebar-link">配置docker文件驱动</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/04/12/k8s%20%2B%20goodrain%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.html#安装kubeadm等环境" class="sidebar-link">安装kubeadm等环境</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/04/12/k8s%20%2B%20goodrain%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.html#kubeadm-master节点初始化" class="sidebar-link">kubeadm master节点初始化</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/04/12/k8s%20%2B%20goodrain%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.html#k8s节点初始化" class="sidebar-link">k8s节点初始化</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/2019/04/12/k8s%20%2B%20goodrain%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.html#k8s主节点配置好雨环境文件" class="sidebar-link">k8s主节点配置好雨环境文件</a><ul class="sidebar-sub-headers"></ul></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="k8s-goodrain-环境搭建"><a href="#k8s-goodrain-环境搭建" aria-hidden="true" class="header-anchor">#</a> k8s + goodrain 环境搭建</h1> <small><div>发布于 06/07/2019, 10:34 PM</div> <span>
+  分类:
+  <a href="/blog/categories/#运维">
+    运维
+  </a></span> <span>
+  标签:
+  <a href="/blog/tags/#k8s">
+    k8s
+  </a></span></small> <p></p><div class="table-of-contents"><ul><li><a href="#安装docker和k8s集群环境">安装docker和k8s集群环境</a></li><li><a href="#配置docker文件驱动">配置docker文件驱动</a></li><li><a href="#安装kubeadm等环境">安装kubeadm等环境</a></li><li><a href="#kubeadm-master节点初始化">kubeadm master节点初始化</a></li><li><a href="#k8s节点初始化">k8s节点初始化</a></li><li><a href="#k8s主节点配置好雨环境文件">k8s主节点配置好雨环境文件</a></li></ul></div><p></p> <h2 id="安装docker和k8s集群环境"><a href="#安装docker和k8s集群环境" aria-hidden="true" class="header-anchor">#</a> 安装docker和k8s集群环境</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>systemctl stop firewalld.service
+systemctl disable firewalld.service
+yum <span class="token function">install</span> -y yum-utils
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum list docker-ce --showduplicates <span class="token operator">|</span> <span class="token function">sort</span> -r
+yum <span class="token function">install</span> docker-ce -y
+systemctl start docker <span class="token operator">&amp;&amp;</span> systemctl <span class="token function">enable</span> docker
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h2 id="配置docker文件驱动"><a href="#配置docker文件驱动" aria-hidden="true" class="header-anchor">#</a> 配置docker文件驱动</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;</span> /etc/docker/daemon.json <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+{
+  &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;],
+  &quot;log-driver&quot;: &quot;json-file&quot;,
+  &quot;log-opts&quot;: {
+    &quot;max-size&quot;: &quot;100m&quot;
+  },
+  &quot;storage-driver&quot;: &quot;overlay2&quot;,
+  &quot;storage-opts&quot;: [
+    &quot;overlay2.override_kernel_check=true&quot;
+  ]
+}
+EOF</span>
+systemctl daemon-reload
+systemctl restart docker
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h2 id="安装kubeadm等环境"><a href="#安装kubeadm等环境" aria-hidden="true" class="header-anchor">#</a> 安装kubeadm等环境</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&lt;&lt;</span>EOF <span class="token operator">&gt;</span> /etc/yum.repos.d/kubernetes.repo
+<span class="token punctuation">[</span>kubernetes<span class="token punctuation">]</span>
+name<span class="token operator">=</span>Kubernetes
+baseurl<span class="token operator">=</span>http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled<span class="token operator">=</span>1
+gpgcheck<span class="token operator">=</span>1
+repo_gpgcheck<span class="token operator">=</span>1
+gpgkey<span class="token operator">=</span>http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+exclude<span class="token operator">=</span>kube*
+EOF
+
+<span class="token comment"># Set SELinux in permissive mode (effectively disabling it)</span>
+setenforce 0
+<span class="token function">sed</span> -i <span class="token string">'s/^SELINUX=enforcing$/SELINUX=permissive/'</span> /etc/selinux/config
+
+yum <span class="token function">install</span> -y kubelet kubeadm kubectl --disableexcludes<span class="token operator">=</span>kubernetes
+
+systemctl <span class="token function">enable</span> --now kubelet
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><h2 id="kubeadm-master节点初始化"><a href="#kubeadm-master节点初始化" aria-hidden="true" class="header-anchor">#</a> kubeadm master节点初始化</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>kubeadm config images list <span class="token operator">|</span> <span class="token function">sed</span> -e <span class="token string">'s/^/docker pull /g'</span> -e <span class="token string">'s#k8s.gcr.io#registry.cn-hangzhou.aliyuncs.com/google_containers#g'</span> <span class="token operator">|</span> sh -x
+docker images <span class="token operator">|</span> <span class="token function">grep</span> registry.cn-hangzhou.aliyuncs.com/google_containers <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print &quot;docker tag&quot;,<span class="token variable">$1</span>&quot;:&quot;<span class="token variable">$2</span>,<span class="token variable">$1</span>&quot;:&quot;<span class="token variable">$2</span>}'</span> <span class="token operator">|</span> <span class="token function">sed</span> -e <span class="token string">'s/registry.cn-hangzhou.aliyuncs.com\/google_containers/k8s.gcr.io/2'</span> <span class="token operator">|</span> sh -x
+docker images <span class="token operator">|</span> <span class="token function">grep</span> registry.cn-hangzhou.aliyuncs.com/google_containers <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print &quot;docker rmi &quot;&quot;&quot;<span class="token variable">$1</span>&quot;&quot;&quot;:&quot;&quot;&quot;<span class="token variable">$2</span>}'</span> <span class="token operator">|</span> sh -x
+<span class="token keyword">echo</span> 1 <span class="token operator">&gt;</span> /proc/sys/net/ipv4/ip_forward
+<span class="token keyword">echo</span> 1 <span class="token operator">&gt;</span> /proc/sys/net/bridge/bridge-nf-call-iptables
+<span class="token keyword">echo</span> 1 <span class="token operator">&gt;</span> /proc/sys/net/bridge/bridge-nf-call-ip6tables
+swapoff -a
+kubeadm init --pod-network-cidr<span class="token operator">=</span>10.244.0.0/16
+<span class="token function">export</span> KUBECONFIG<span class="token operator">=</span>/etc/kubernetes/admin.conf
+<span class="token comment"># 安装flannel 网络插件使得节点可以互相通信</span>
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>记住最后输出的节点加入指令</p> <div class="language-bashc line-numbers-mode"><pre class="language-text"><code>kubeadm join 192.168.102.151:6443 --token uib759.7e38mk96vncbm8az \
+    --discovery-token-ca-cert-hash sha256:aa2ff4df2b038e3114f40d66bccee26b6843b3c25a23e52321c167d22c38db6c
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="k8s节点初始化"><a href="#k8s节点初始化" aria-hidden="true" class="header-anchor">#</a> k8s节点初始化</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>kubeadm config images list <span class="token operator">|</span> <span class="token function">sed</span> -e <span class="token string">'s/^/docker pull /g'</span> -e <span class="token string">'s#k8s.gcr.io#registry.cn-hangzhou.aliyuncs.com/google_containers#g'</span> <span class="token operator">|</span> sh -x
+docker images <span class="token operator">|</span> <span class="token function">grep</span> registry.cn-hangzhou.aliyuncs.com/google_containers <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print &quot;docker tag&quot;,<span class="token variable">$1</span>&quot;:&quot;<span class="token variable">$2</span>,<span class="token variable">$1</span>&quot;:&quot;<span class="token variable">$2</span>}'</span> <span class="token operator">|</span> <span class="token function">sed</span> -e <span class="token string">'s/registry.cn-hangzhou.aliyuncs.com\/google_containers/k8s.gcr.io/2'</span> <span class="token operator">|</span> sh -x
+docker images <span class="token operator">|</span> <span class="token function">grep</span> registry.cn-hangzhou.aliyuncs.com/google_containers <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print &quot;docker rmi &quot;&quot;&quot;<span class="token variable">$1</span>&quot;&quot;&quot;:&quot;&quot;&quot;<span class="token variable">$2</span>}'</span> <span class="token operator">|</span> sh -x
+<span class="token keyword">echo</span> 1 <span class="token operator">&gt;</span> /proc/sys/net/ipv4/ip_forward
+<span class="token keyword">echo</span> 1 <span class="token operator">&gt;</span> /proc/sys/net/bridge/bridge-nf-call-iptables
+<span class="token keyword">echo</span> 1 <span class="token operator">&gt;</span> /proc/sys/net/bridge/bridge-nf-call-ip6tables
+swapoff -a
+kubeadm <span class="token function">join</span> 192.168.0.233:6443 --token egvj6m.r2vjmxivtws1qow5 \
+    --discovery-token-ca-cert-hash sha256:8f7ec26cc69de8dafb6673122954b9c4bed324d2caf65aaaee71804583fb0319 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h2 id="k8s主节点配置好雨环境文件"><a href="#k8s主节点配置好雨环境文件" aria-hidden="true" class="header-anchor">#</a> k8s主节点配置好雨环境文件</h2> <p>新建目录<code>/opt/rainbond/etc/kubernetes/kubecfg</code>,里面放入admin.kubeconfig和kube-proxy.kubeconfig文件</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">cp</span> /etc/kubernetes/admin.conf /opt/rainbond/etc/kubernetes/kubecfg/
+<span class="token function">mv</span> admin.conf admin.kubeconfig
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>kube-proxy.kubeconfig文件内容如下：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># kube-proxy.kubeconfig</span>
+apiVersion: v1
+kind: Config
+clusters:
+- cluster:
+    certificate-authority: <span class="token operator">&lt;</span>base64 ca.crt证书内容<span class="token operator">&gt;</span>
+    server: <span class="token operator">&lt;</span>kube api https地址<span class="token operator">&gt;</span>
+  name: default
+contexts:
+- context:
+    cluster: default
+    namespace: default
+    user: default
+  name: default
+current-context: default
+users:
+- name: default
+  user:
+    token: <span class="token operator">&lt;</span>token<span class="token operator">&gt;</span>
+
+<span class="token comment"># ca.crt 文件：/etc/kubernetes/pki/ca.crt </span>
+<span class="token comment"># 如 base64 /etc/kubernetes/pki/ca.crt &gt; ca.txt</span>
+<span class="token comment"># token 获取方式</span>
+kubectl -n kube-system get secret <span class="token operator">|</span> <span class="token function">grep</span> kube-proxy <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print &quot;secret/&quot;<span class="token variable">$1</span>}'</span> <span class="token operator">|</span> <span class="token function">xargs</span> kubectl describe -n kube-system <span class="token operator">|</span> <span class="token function">grep</span> token: <span class="token operator">|</span> <span class="token function">awk</span> -F: <span class="token string">'{print <span class="token variable">$2</span>}'</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token keyword">echo</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><p>信任goodrain容器仓库
+在/etc/docker/daemon.json加入如下配置,注意放在第一行</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token string">&quot;insecure-registries&quot;</span><span class="token keyword">:</span> <span class="token punctuation">[</span><span class="token string">&quot;goodrain.me&quot;</span><span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>重启docker</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>systemctl daemon-reload
+systemctl restart docker
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>初始化rainbond数据中心</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">wget</span> https://pkg.rainbond.com/releases/common/v5.1/grctl
+<span class="token function">chmod</span> +x ./grctl
+./grctl init --iip 192.168.102.151 --deploy-type thirdparty 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>rainbond节点加入,需要各主机间配置免密登录</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># worker节点NAME，通过如下命令获取</span>
+kubectl get node -o wide 
+
+<span class="token comment"># 添加已有k8s worker计算节点</span>
+grctl node add --host <span class="token operator">&lt;</span>worker节点hostname<span class="token operator">&gt;</span> --iip <span class="token operator">&lt;</span>worker内网ip<span class="token operator">&gt;</span> --key /root/.ssh/id_rsa.pub --role compute --id <span class="token operator">&lt;</span>worker节点NAME<span class="token operator">&gt;</span>
+grctl node <span class="token function">install</span> <span class="token operator">&lt;</span>worker节点NAME<span class="token operator">&gt;</span>
+
+<span class="token comment"># 添加已有k8s master管理节点</span>
+grctl node add --host <span class="token operator">&lt;</span>master节点hostname<span class="token operator">&gt;</span> --iip <span class="token operator">&lt;</span>worker内网ip<span class="token operator">&gt;</span> --key /root/.ssh/id_rsa.pub --role manage --id <span class="token operator">&lt;</span>master节点NAME<span class="token operator">&gt;</span>
+grctl node <span class="token function">install</span> <span class="token operator">&lt;</span>master节点NAME<span class="token operator">&gt;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><div id="vcomments"></div></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/app.ccf869c0.js" defer></script><script src="/assets/js/25.df47188f.js" defer></script><script src="/assets/js/9.db4378e9.js" defer></script><script src="/assets/js/12.613cb65c.js" defer></script>
+  </body>
+</html>

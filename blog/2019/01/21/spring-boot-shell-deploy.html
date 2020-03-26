@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring Boot部署Shell脚本 | 走在回忆之外的博客</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/2.styles.018b034a.css" as="style"><link rel="preload" href="/assets/js/app.ccf869c0.js" as="script"><link rel="preload" href="/assets/js/20.09cd4c1b.js" as="script"><link rel="preload" href="/assets/js/9.db4378e9.js" as="script"><link rel="preload" href="/assets/js/12.613cb65c.js" as="script"><link rel="prefetch" href="/assets/js/0.18cadbf9.js"><link rel="prefetch" href="/assets/js/1.d1daa0f2.js"><link rel="prefetch" href="/assets/js/10.27a8b706.js"><link rel="prefetch" href="/assets/js/11.e79c91cb.js"><link rel="prefetch" href="/assets/js/13.3f0b1f43.js"><link rel="prefetch" href="/assets/js/14.d872cc34.js"><link rel="prefetch" href="/assets/js/15.ffb1ef98.js"><link rel="prefetch" href="/assets/js/16.c7ada16b.js"><link rel="prefetch" href="/assets/js/17.ecf82cc6.js"><link rel="prefetch" href="/assets/js/18.8a2b9ec2.js"><link rel="prefetch" href="/assets/js/19.165f6698.js"><link rel="prefetch" href="/assets/js/21.042605b9.js"><link rel="prefetch" href="/assets/js/22.42921429.js"><link rel="prefetch" href="/assets/js/23.d815bf15.js"><link rel="prefetch" href="/assets/js/24.7c176d91.js"><link rel="prefetch" href="/assets/js/25.df47188f.js"><link rel="prefetch" href="/assets/js/26.436dcb77.js"><link rel="prefetch" href="/assets/js/27.7e6a558e.js"><link rel="prefetch" href="/assets/js/28.faa900d8.js"><link rel="prefetch" href="/assets/js/29.8e36e633.js"><link rel="prefetch" href="/assets/js/30.17168196.js"><link rel="prefetch" href="/assets/js/31.c8ab0cc7.js"><link rel="prefetch" href="/assets/js/32.a3c72bfa.js"><link rel="prefetch" href="/assets/js/4.4b907ce9.js"><link rel="prefetch" href="/assets/js/5.3821dc34.js"><link rel="prefetch" href="/assets/js/6.7cd846c3.js"><link rel="prefetch" href="/assets/js/7.dad13e92.js"><link rel="prefetch" href="/assets/js/8.966d90c7.js">
+    <link rel="stylesheet" href="/assets/css/2.styles.018b034a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">走在回忆之外的博客</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/blog/categories/" class="nav-link">分类</a></div><div class="nav-item"><a href="/blog/tags/" class="nav-link">标签</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><a href="https://www.github.com/yukai0228" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://www.baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  技术支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/blog/categories/" class="nav-link">分类</a></div><div class="nav-item"><a href="/blog/tags/" class="nav-link">标签</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><a href="https://www.github.com/yukai0228" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://www.baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  技术支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>Spring Boot部署Shell脚本</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/2019/01/21/spring-boot-shell-deploy.html#脚本代码" class="sidebar-link">脚本代码</a><ul class="sidebar-sub-headers"></ul></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="spring-boot部署shell脚本"><a href="#spring-boot部署shell脚本" aria-hidden="true" class="header-anchor">#</a> Spring Boot部署Shell脚本</h1> <small><div>发布于 01/21/2019, 4:57 PM</div> <span>
+  分类:
+  <a href="/blog/categories/#开发">
+    开发
+  </a></span> <span>
+  标签:
+  <a href="/blog/tags/#spring-boot">
+    Spring Boot
+  </a></span></small> <p></p><div class="table-of-contents"><ul><li><a href="#脚本代码">脚本代码</a></li></ul></div><p></p> <h2 id="脚本代码"><a href="#脚本代码" aria-hidden="true" class="header-anchor">#</a> 脚本代码</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>ENV<span class="token operator">=</span>dev  
+RUNNING_USER<span class="token operator">=</span>root  
+ADATE<span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span> +%Y%m%d%H%M%S<span class="token variable">`</span></span>  
+SERVER_NAME<span class="token operator">=</span>school-customer-0.0.1-SNAPSHOT  
+  
+APP_HOME<span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">pwd</span><span class="token variable">`</span></span> 
+  
+<span class="token function">dirname</span> <span class="token variable">$0</span><span class="token operator">|</span><span class="token function">grep</span> <span class="token string">&quot;^/&quot;</span> <span class="token operator">&gt;</span>/dev/null  
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$?</span> -eq 0 <span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">then</span>  
+   APP_HOME<span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">dirname</span> $0<span class="token variable">`</span></span>  
+<span class="token keyword">else</span>  
+    <span class="token function">dirname</span> <span class="token variable">$0</span><span class="token operator">|</span><span class="token function">grep</span> <span class="token string">&quot;^\.&quot;</span> <span class="token operator">&gt;</span>/dev/null  
+    retval<span class="token operator">=</span><span class="token variable">$?</span>  
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$retval</span> -eq 0 <span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">then</span>  
+        APP_HOME<span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">dirname</span> $0<span class="token operator">|</span><span class="token function">sed</span> <span class="token string">&quot;s#^.#<span class="token variable">$APP_HOME#</span>&quot;</span><span class="token variable">`</span></span>  
+    <span class="token keyword">else</span>  
+        APP_HOME<span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">dirname</span> $0<span class="token operator">|</span><span class="token function">sed</span> <span class="token string">&quot;s#^#<span class="token variable">$APP_HOME</span>/#&quot;</span><span class="token variable">`</span></span>  
+    <span class="token keyword">fi</span>  
+<span class="token keyword">fi</span>  
+  
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token string">&quot;<span class="token variable">$APP_HOME</span>/logs&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">then</span>  
+  <span class="token function">mkdir</span> <span class="token variable">$APP_HOME</span>/logs  
+<span class="token keyword">fi</span>  
+  
+LOG_PATH<span class="token operator">=</span><span class="token variable">$APP_HOME</span>/logs/<span class="token variable">$SERVER_NAME</span>.out  
+GC_LOG_PATH<span class="token operator">=</span><span class="token variable">$APP_HOME</span>/logs/gc-<span class="token variable">$SERVER_NAME</span>-<span class="token variable">$ADATE</span>.log  
+<span class="token comment">#JMX监控需用到  </span>
+JMX<span class="token operator">=</span><span class="token string">&quot;-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1091 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false&quot;</span>  
+<span class="token comment">#JVM参数  </span>
+JVM_OPTS<span class="token operator">=</span><span class="token string">&quot;-Dname=<span class="token variable">$SERVER_NAME</span> -Djeesuite.configcenter.profile=<span class="token variable">$ENV</span> -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Duser.timezone=Asia/Shanghai -Xms512M -Xmx512M -XX:PermSize=256M -XX:MaxPermSize=512M -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGCDateStamps -Xloggc:<span class="token variable">$GC_LOG_PATH</span> -XX:+PrintGCDetails -XX:NewRatio=1 -XX:SurvivorRatio=30 -XX:+UseParallelGC -XX:+UseParallelOldGC&quot;</span>  
+  
+JAR_FILE<span class="token operator">=</span><span class="token variable">$SERVER_NAME</span>.jar  
+pid<span class="token operator">=</span>0  
+  
+  
+start<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+  checkpid  
+  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -n <span class="token string">&quot;<span class="token variable">$pid</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+    <span class="token comment">#JAVA_CMD=&quot;nohup java -server -jar $JVM_OPTS $JAR_FILE &gt; $LOG_PATH 2&gt;&amp;1 &amp;&quot;  </span>
+    <span class="token comment">#su - $RUNNING_USER -c &quot;$JAVA_CMD&quot;  </span>
+    <span class="token function">nohup</span> java -server -jar <span class="token variable">$JVM_OPTS</span> <span class="token variable">$JAR_FILE</span> <span class="token operator">&gt;</span> <span class="token variable">$LOG_PATH</span> 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1 <span class="token operator">&amp;</span>  
+    <span class="token keyword">echo</span> <span class="token string">&quot;---------------------------------&quot;</span>  
+    <span class="token keyword">echo</span> <span class="token string">&quot;启动完成，按CTRL+C退出日志界面即可&gt;&gt;&gt;&gt;&gt;&quot;</span>  
+    <span class="token keyword">echo</span> <span class="token string">&quot;---------------------------------&quot;</span>  
+    <span class="token function">sleep</span> 3s  
+    <span class="token function">tail</span> -f <span class="token variable">$LOG_PATH</span>  
+  <span class="token keyword">else</span>  
+      <span class="token keyword">echo</span> <span class="token string">&quot;<span class="token variable">$SERVER_NAME</span> is runing PID: <span class="token variable">$pid</span>&quot;</span>     
+  <span class="token keyword">fi</span>  
+  
+<span class="token punctuation">}</span>  
+  
+  
+status<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+   checkpid  
+   <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -n <span class="token string">&quot;<span class="token variable">$pid</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+     <span class="token keyword">echo</span> <span class="token string">&quot;<span class="token variable">$SERVER_NAME</span> not runing&quot;</span>  
+   <span class="token keyword">else</span>  
+     <span class="token keyword">echo</span> <span class="token string">&quot;<span class="token variable">$SERVER_NAME</span> runing PID: <span class="token variable">$pid</span>&quot;</span>  
+      <span class="token function">sleep</span> 4s  
+     <span class="token function">tail</span> -f <span class="token variable">$LOG_PATH</span>  
+   <span class="token keyword">fi</span>   
+<span class="token punctuation">}</span>  
+  
+checkpid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+    pid<span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">ps</span> -ef <span class="token operator">|</span><span class="token function">grep</span> $JAR_FILE <span class="token operator">|</span><span class="token function">grep</span> -v <span class="token function">grep</span> <span class="token operator">|</span><span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$2</span>}'</span><span class="token variable">`</span></span>  
+<span class="token punctuation">}</span>  
+  
+stop<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+    checkpid  
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -n <span class="token string">&quot;<span class="token variable">$pid</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+     <span class="token keyword">echo</span> <span class="token string">&quot;<span class="token variable">$SERVER_NAME</span> not runing&quot;</span>  
+    <span class="token keyword">else</span>  
+      dump  
+      <span class="token keyword">echo</span> <span class="token string">&quot;<span class="token variable">$SERVER_NAME</span> stop...&quot;</span>  
+      <span class="token function">kill</span> <span class="token variable">$pid</span>  
+    <span class="token keyword">fi</span>   
+<span class="token punctuation">}</span>  
+  
+restart<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+    stop   
+    <span class="token function">sleep</span> 1s  
+    start  
+<span class="token punctuation">}</span>  
+dump<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>   
+    LOGS_DIR<span class="token operator">=</span><span class="token variable">$APP_HOME</span>/logs/  
+    DUMP_DIR<span class="token operator">=</span><span class="token variable">$LOGS_DIR</span>/dump  
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token variable">$DUMP_DIR</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+        <span class="token function">mkdir</span> <span class="token variable">$DUMP_DIR</span>  
+    <span class="token keyword">fi</span>  
+    DUMP_DATE<span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span> +%Y%m%d%H%M%S<span class="token variable">`</span></span>  
+    DATE_DIR<span class="token operator">=</span><span class="token variable">$DUMP_DIR</span>/<span class="token variable">$DUMP_DATE</span>  
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token variable">$DATE_DIR</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+        <span class="token function">mkdir</span> <span class="token variable">$DATE_DIR</span>  
+    <span class="token keyword">fi</span>  
+      
+    <span class="token keyword">echo</span>  <span class="token string">&quot;Dumping the <span class="token variable">$SERVER_NAME</span> ...\c&quot;</span>  
+      
+    PIDS<span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> java <span class="token operator">|</span> <span class="token function">grep</span> $JAR_FILE <span class="token operator">|</span><span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$2</span>}'</span><span class="token variable">`</span></span>  
+    <span class="token keyword">for</span> PID <span class="token keyword">in</span> <span class="token variable">$PIDS</span> <span class="token punctuation">;</span> <span class="token keyword">do</span>  
+        jstack <span class="token variable">$PID</span> <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/jstack-<span class="token variable">$PID</span>.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+        <span class="token keyword">echo</span> -e  <span class="token string">&quot;PID=<span class="token variable">$PID</span> .\c&quot;</span>  
+        jinfo <span class="token variable">$PID</span> <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/jinfo-<span class="token variable">$PID</span>.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+        <span class="token keyword">echo</span> -e  <span class="token string">&quot;.\c&quot;</span>  
+        jstat -gcutil <span class="token variable">$PID</span> <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/jstat-gcutil-<span class="token variable">$PID</span>.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+        <span class="token keyword">echo</span> -e  <span class="token string">&quot;.\c&quot;</span>  
+        jstat -gccapacity <span class="token variable">$PID</span> <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/jstat-gccapacity-<span class="token variable">$PID</span>.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+        <span class="token keyword">echo</span> -e  <span class="token string">&quot;.\c&quot;</span>  
+        jmap <span class="token variable">$PID</span> <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/jmap-<span class="token variable">$PID</span>.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+        <span class="token keyword">echo</span> -e  <span class="token string">&quot;.\c&quot;</span>  
+        jmap -heap <span class="token variable">$PID</span> <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/jmap-heap-<span class="token variable">$PID</span>.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+        <span class="token keyword">echo</span> -e  <span class="token string">&quot;.\c&quot;</span>  
+        jmap -histo <span class="token variable">$PID</span> <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/jmap-histo-<span class="token variable">$PID</span>.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+        <span class="token keyword">echo</span> -e  <span class="token string">&quot;.\c&quot;</span>  
+        <span class="token keyword">if</span> <span class="token punctuation">[</span> -r /usr/sbin/lsof <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+        /usr/sbin/lsof -p <span class="token variable">$PID</span> <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/lsof-<span class="token variable">$PID</span>.dump  
+        <span class="token keyword">echo</span> -e  <span class="token string">&quot;.\c&quot;</span>  
+        <span class="token keyword">fi</span>  
+    <span class="token keyword">done</span>  
+      
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -r /bin/netstat <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+    /bin/netstat -an <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/netstat.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+    <span class="token keyword">echo</span> -e  <span class="token string">&quot;netstat.dump ...&quot;</span>  
+    <span class="token keyword">fi</span>  
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -r /usr/bin/iostat <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+    /usr/bin/iostat <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/iostat.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+    <span class="token keyword">echo</span> -e  <span class="token string">&quot;iostat.dump ...&quot;</span>  
+    <span class="token keyword">fi</span>  
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -r /usr/bin/mpstat <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+    /usr/bin/mpstat <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/mpstat.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+    <span class="token keyword">echo</span> -e  <span class="token string">&quot;mpstat.dump ...&quot;</span>  
+    <span class="token keyword">fi</span>  
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -r /usr/bin/vmstat <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+    /usr/bin/vmstat <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/vmstat.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+    <span class="token keyword">echo</span> -e  <span class="token string">&quot;vmstat.dump ...&quot;</span>  
+    <span class="token keyword">fi</span>  
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -r /usr/bin/free <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+    /usr/bin/free -t <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/free.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+    <span class="token keyword">echo</span> -e  <span class="token string">&quot;free.dump ...&quot;</span>  
+    <span class="token keyword">fi</span>  
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -r /usr/bin/sar <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+    /usr/bin/sar <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/sar.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+    <span class="token keyword">echo</span> -e  <span class="token string">&quot;.\c&quot;</span>  
+    <span class="token keyword">fi</span>  
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -r /usr/bin/uptime <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>  
+    /usr/bin/uptime <span class="token operator">&gt;</span> <span class="token variable">$DATE_DIR</span>/uptime.dump 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1  
+    <span class="token keyword">echo</span> -e  <span class="token string">&quot;.\c&quot;</span>  
+    <span class="token keyword">fi</span>  
+      
+    <span class="token keyword">echo</span> <span class="token string">&quot;OK!&quot;</span>  
+    <span class="token keyword">echo</span> <span class="token string">&quot;DUMP: <span class="token variable">$DATE_DIR</span>&quot;</span>  
+<span class="token punctuation">}</span>  
+  
+<span class="token keyword">case</span> <span class="token variable">$1</span> <span class="token keyword">in</span>    
+          start<span class="token punctuation">)</span> start<span class="token punctuation">;</span><span class="token punctuation">;</span>    
+          stop<span class="token punctuation">)</span>  stop<span class="token punctuation">;</span><span class="token punctuation">;</span>   
+          restart<span class="token punctuation">)</span>  restart<span class="token punctuation">;</span><span class="token punctuation">;</span>    
+          status<span class="token punctuation">)</span>  status<span class="token punctuation">;</span><span class="token punctuation">;</span>     
+          dump<span class="token punctuation">)</span>  dump<span class="token punctuation">;</span><span class="token punctuation">;</span>     
+              *<span class="token punctuation">)</span>  <span class="token keyword">echo</span> <span class="token string">&quot;require start|stop|restart|status|dump&quot;</span>  <span class="token punctuation">;</span><span class="token punctuation">;</span>    
+esac  
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br><span class="line-number">160</span><br><span class="line-number">161</span><br></div></div><div id="vcomments"></div></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/app.ccf869c0.js" defer></script><script src="/assets/js/20.09cd4c1b.js" defer></script><script src="/assets/js/9.db4378e9.js" defer></script><script src="/assets/js/12.613cb65c.js" defer></script>
+  </body>
+</html>

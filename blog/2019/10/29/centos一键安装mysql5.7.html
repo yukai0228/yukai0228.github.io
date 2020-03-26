@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>centos一键安装mysql5.7 | 走在回忆之外的博客</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/2.styles.018b034a.css" as="style"><link rel="preload" href="/assets/js/app.ccf869c0.js" as="script"><link rel="preload" href="/assets/js/26.436dcb77.js" as="script"><link rel="preload" href="/assets/js/9.db4378e9.js" as="script"><link rel="prefetch" href="/assets/js/0.18cadbf9.js"><link rel="prefetch" href="/assets/js/1.d1daa0f2.js"><link rel="prefetch" href="/assets/js/10.27a8b706.js"><link rel="prefetch" href="/assets/js/11.e79c91cb.js"><link rel="prefetch" href="/assets/js/12.613cb65c.js"><link rel="prefetch" href="/assets/js/13.3f0b1f43.js"><link rel="prefetch" href="/assets/js/14.d872cc34.js"><link rel="prefetch" href="/assets/js/15.ffb1ef98.js"><link rel="prefetch" href="/assets/js/16.c7ada16b.js"><link rel="prefetch" href="/assets/js/17.ecf82cc6.js"><link rel="prefetch" href="/assets/js/18.8a2b9ec2.js"><link rel="prefetch" href="/assets/js/19.165f6698.js"><link rel="prefetch" href="/assets/js/20.09cd4c1b.js"><link rel="prefetch" href="/assets/js/21.042605b9.js"><link rel="prefetch" href="/assets/js/22.42921429.js"><link rel="prefetch" href="/assets/js/23.d815bf15.js"><link rel="prefetch" href="/assets/js/24.7c176d91.js"><link rel="prefetch" href="/assets/js/25.df47188f.js"><link rel="prefetch" href="/assets/js/27.7e6a558e.js"><link rel="prefetch" href="/assets/js/28.faa900d8.js"><link rel="prefetch" href="/assets/js/29.8e36e633.js"><link rel="prefetch" href="/assets/js/30.17168196.js"><link rel="prefetch" href="/assets/js/31.c8ab0cc7.js"><link rel="prefetch" href="/assets/js/32.a3c72bfa.js"><link rel="prefetch" href="/assets/js/4.4b907ce9.js"><link rel="prefetch" href="/assets/js/5.3821dc34.js"><link rel="prefetch" href="/assets/js/6.7cd846c3.js"><link rel="prefetch" href="/assets/js/7.dad13e92.js"><link rel="prefetch" href="/assets/js/8.966d90c7.js">
+    <link rel="stylesheet" href="/assets/css/2.styles.018b034a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">走在回忆之外的博客</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/blog/categories/" class="nav-link">分类</a></div><div class="nav-item"><a href="/blog/tags/" class="nav-link">标签</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><a href="https://www.github.com/yukai0228" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://www.baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  技术支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/blog/categories/" class="nav-link">分类</a></div><div class="nav-item"><a href="/blog/tags/" class="nav-link">标签</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><a href="https://www.github.com/yukai0228" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://www.baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  技术支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>centos一键安装mysql5.7</span> <!----></p> <ul class="sidebar-group-items"></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="centos一键安装mysql5-7"><a href="#centos一键安装mysql5-7" aria-hidden="true" class="header-anchor">#</a> centos一键安装mysql5.7</h1> <small><div>发布于 10/30/2019, 12:14 AM</div> <span>
+  分类:
+  <a href="/blog/categories/#运维">
+    运维
+  </a></span> <span>
+  标签:
+  <a href="/blog/tags/#centos">
+    centos
+  </a><a href="/blog/tags/#mysql">
+    mysql
+  </a></span></small> <p></p><div class="table-of-contents"><ul></ul></div><p></p> <ul><li>编写mysql.cnf文件：</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>[mysqld]
+port = 3306
+basedir=/data/mysql/mysql
+datadir=/data/mysql/mysql/data
+max_connections=1000
+character-set-server=utf8
+default-storage-engine=INNODB
+lower_case_table_names=1
+max_allowed_packet=20M
+sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+skip-grant-tables=1
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mariadb according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
+[mysqld_safe]
+log-error=/var/log/mariadb/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><ul><li>编写并运行mysql_init.sh文件（与mysql.cnf放在同一目录下），内容如下：</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>wget https://cdn.mysql.com/archives/mysql-5.7/mysql-5.7.21-linux-glibc2.12-x86_64.tar.gz
+mkdir -p /data/mysql/
+rm -rf /etc/my.cnf
+cp mysql-5.7.21-linux-glibc2.12-x86_64.tar.gz /data/mysql/
+cp mysql.cnf /etc/my.cnf
+cd /data/mysql/
+tar -xzvf mysql-5.7.21-linux-glibc2.12-x86_64.tar.gz
+mv mysql-5.7.21-linux-glibc2.12-x86_64 mysql
+rm -rf mysql-5.7.21-linux-glibc2.12-x86_64.tar.gz
+groupadd mysql
+useradd -r -g mysql mysql
+cd mysql
+mkdir data
+chown -R mysql /data/mysql/mysql/
+chgrp -R mysql /data/mysql/mysql/
+cd /data/mysql/mysql/bin
+yum install -y libaio-devel.x86_64 numactl
+./mysqld --initialize --user=mysql --basedir=/data/mysql/mysql/ --datadir=/data/mysql/mysql/data/
+mkdir /var/log/mariadb
+touch /var/log/mariadb/mariadb.log
+chown -R mysql:mysql /var/log/mariadb/
+cd /data/mysql/mysql/support-files/
+cp mysql.server /etc/init.d/mysql
+chmod +x /etc/init.d/mysql
+yum install initscripts -y
+service mysql start
+chkconfig --add mysql
+cd /data/mysql/mysql/bin
+./mysql -u root &lt;&lt;EOF
+flush privileges;
+grant all privileges on *.* to root@'%' identified by '123456' with grant option;
+USE mysql;
+DELETE FROM user WHERE User=&quot;root&quot; and Host=&quot;localhost&quot;;
+flush privileges;
+exit
+EOF
+sed -i 's/skip-grant-tables=1/# skip-grant-tables=1/g' /etc/my.cnf
+service mysql restart
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br></div></div><p>等待运行成功</p></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/app.ccf869c0.js" defer></script><script src="/assets/js/26.436dcb77.js" defer></script><script src="/assets/js/9.db4378e9.js" defer></script>
+  </body>
+</html>
